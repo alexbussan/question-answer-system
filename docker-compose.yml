@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  localstack:
+    container_name: localstack_main
+    image: localstack/localstack
+    network_mode: bridge
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=dynamodb
+      - LAMBDA_EXECUTOR=docker-reuse
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      - "/tmp/localstack:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
