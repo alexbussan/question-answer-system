@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 services:
   localstack:
     container_name: localstack_main
@@ -7,9 +7,11 @@ services:
     ports:
       - "4566:4566"
     environment:
-      - SERVICES=dynamodb
+      - SERVICES=dynamodb,sts,cloudformation,s3,iam,lambda,apigateway,serverless
       - LAMBDA_EXECUTOR=docker-reuse
       - DATA_DIR=/tmp/localstack/data
+      - AWS_ACCESS_KEY_ID=XXX
+      - AWS_SECRET_ACCESS_KEY=XXX
     volumes:
       - "/tmp/localstack:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
