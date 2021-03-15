@@ -12,6 +12,8 @@ class TfidfEmbedder(Processor):
         tfidf = vectorizer.fit_transform(corpus)
         vectorizer.vocabulary_, tfidf.todense()
 
+        # return dataframe
+
 
 class SBertEmbedder(Processor):
     def __init__(self):
