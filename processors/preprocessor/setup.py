@@ -10,8 +10,8 @@ if os.path.isfile(requirements_path):
         install_requires = f.read().splitlines()
 
 setup(
-    name="embedder",
-    version="0.0.2",
+    name="preprocessor",
+    version="0.0.0",
     install_requires=install_requires,
     packages=find_packages(exclude=("tests",)),
 )

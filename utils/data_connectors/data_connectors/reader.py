@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import json
 
 import boto3
 
@@ -18,7 +19,7 @@ class Reader(ABC):
 
 
 class CsvReader(Reader):
-    def __init__(self, input_path):
+    def __init__(self):
         self.deserialized_data = None
 
     def read(self, input_path):
@@ -36,6 +37,5 @@ class CsvReader(Reader):
 
     def read_local(self, input_path):
         # read from local file with context manager
-        # self.deserialized_data = data
-        with open("train-v2.0.json") as f:
+        with open(input_path) as f:
             self.deserialized_data = json.load(f)

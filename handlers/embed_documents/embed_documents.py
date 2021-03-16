@@ -3,7 +3,7 @@ import boto3
 import logging
 
 from handlers.base_handler import HandlerBase
-from embedder import TfidfEmbedder
+from embedder.embedder.core import TfidfEmbedder
 from data_connectors.reader import CsvReader
 from data_connectors.writer import CsvWriter
 
