@@ -7,7 +7,7 @@ services:
     ports:
       - "4566:4566"
     environment:
-      - SERVICES=dynamodb,sts,cloudformation,s3,iam,lambda,apigateway,serverless
+      - SERVICES=dynamodb,sts,cloudformation,s3,iam,lambda,apigateway,serverless,ecr
       - LAMBDA_EXECUTOR=docker-reuse
       - DATA_DIR=/tmp/localstack/data
       - AWS_ACCESS_KEY_ID=XXX

@@ -139,3 +139,7 @@ cython_debug/
 
 # IDE
 .idea
+
+# Serverless directories
+.serverless
+node_modules/

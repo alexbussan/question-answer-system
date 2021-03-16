@@ -8,9 +8,10 @@ class TfidfEmbedder(Processor):
         self.corpus = corpus
 
     def process(self):
-        vectorizer = TfidfVectorizer(stop_words='english')
-        tfidf = vectorizer.fit_transform(corpus)
-        vectorizer.vocabulary_, tfidf.todense()
+        # vectorizer = TfidfVectorizer(stop_words='english')
+        # tfidf = vectorizer.fit_transform(corpus)
+        # vectorizer.vocabulary_, tfidf.todense()
+        print("hello")
 
         # return dataframe
 
