@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  ImageName:
+    Type: String
+    Default: qna-dev-ecr-repository
+  ImageTag:
+    Type: String
+    Default: 0.0.1
+
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${ImageName}:${ImageTag}
+      PackageType: Image
