@@ -51,6 +51,8 @@ create and activate a conda environment
 
 `pip install -r requirements.txt` (this file needs to be updated)
 
+`python -m spacy download en` (needed for spacy lemmatizer)
+
 `python run_processors.py`
 
 Here is what the result looks like:
