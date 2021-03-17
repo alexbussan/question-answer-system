@@ -5,3 +5,5 @@ numpy
 sklearn
 pandas
 spacy
+boto3
+botocore
