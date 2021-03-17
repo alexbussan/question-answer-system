@@ -1,0 +1,2 @@
+data_connectors_qna==0.0.0
+candidate_finder==0.0.0

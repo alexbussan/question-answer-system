@@ -9,11 +9,11 @@ class Writer(ABC):
         pass
 
     @abstractmethod
-    def write_s3(self):
+    def write_s3(self, output_path, data):
         pass
 
     @abstractmethod
-    def write_local(self):
+    def write_local(self, output_path, data):
         pass
 
 

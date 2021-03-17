@@ -5,3 +5,5 @@ Resources:
     Type: AWS::ECR::Repository
     Properties:
       RepositoryName: qna-dev-embed-documents
+
+# TODO: add ECRRepository for each handler image

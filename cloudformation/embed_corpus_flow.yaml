@@ -1,6 +1,7 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: "Flow that embeds each document in the search corpus, and stores these embeddings."
 
+# TODO: add parameters for each handler
 Parameters:
   EmbedDocumentsImageName:
     Type: String
@@ -71,3 +72,5 @@ Resources:
             }
           - {lambdaArn: !GetAtt [ EmbedDocumentsFunction, Arn ]}
       RoleArn: !GetAtt [ StatesExecutionRole, Arn ]
+
+# TODO: add FindAnswerStateMachine

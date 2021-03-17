@@ -35,8 +35,9 @@ class EmbedDocuments(HandlerBase):
         writer = CsvWriter()
         writer.write(embeddings_path, embeddings)
 
-    def return_response(self, embeddings_path, lemmas_path, vectorizer_id):
+    def return_response(self, embeddings_path, lemmas_path, vectorizer_id, flow_id):
         body = {
+            "flow_id": flow_id,
             "embeddings_path": embeddings_path,
             "lemmas_path": lemmas_path,
             "vectorizer_id": vectorizer_id
@@ -68,10 +69,11 @@ class EmbedDocuments(HandlerBase):
         self.write_data(lemmas_path, self.lemmas)
 
         # pass relevant information to next step in step functions
-        self.return_response(embeddings_path, lemmas_path, self.vectorizer_id)
+        self.return_response(
+            embeddings_path, lemmas_path, self.vectorizer_id, event['id'])
 
 
 def handler(event, context):
-    return EmbedDocuments(event, context).handle()
+    return EmbedDocuments().handle(event, context)
 
 
