@@ -28,7 +28,7 @@ Then, when a question is asked, it is also embedded. The question embedding is
 compared against all corpus embeddings and the top k most similar documents are taken as 
 candidates.
 
-The candidates are then run through a BERT model that is finetuned on the SQUAD Q&A dataset.
+The candidate docuemnts are then run through a BERT model (along with the question) that is finetuned on the SQUAD Q&A dataset.
 This BERT model returns a single answer span for each document, and a score for each answer. 
 
 
