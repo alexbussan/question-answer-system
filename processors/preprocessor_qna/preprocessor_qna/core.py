@@ -7,6 +7,7 @@ class SquadDatasetTransformer(Processor):
         paragraphs = []
         questions = []
 
+        # only look at first topic during development, for speed of debugging
         topic = dataset["data"][0]
         # for topic in dataset["data"]:
         for pgraph in topic["paragraphs"]:

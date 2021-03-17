@@ -17,6 +17,7 @@ class Writer(ABC):
         pass
 
 
+# TODO: flesh out this class
 class CsvWriter(Writer):
     def write(self, output_path, data):
         # TODO: add exceptions
