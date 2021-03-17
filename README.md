@@ -29,7 +29,7 @@ compared against all corpus embeddings and the top k most similar documents are 
 candidates.
 
 The candidates are then run through a BERT model that is finetuned on the SQUAD Q&A dataset.
-This BERT model returns a single answer span and score fore each documents's answer. 
+This BERT model returns a single answer span for each document, and a score for each answer. 
 
 
 ## Todos
