@@ -57,7 +57,7 @@ Here is what the result looks like:
 ![result](docs/images/results.png)
 
 ## Credits
-Major credit goes to Paton Wongviboonsin who's [blog series](https://medium.com/@patonw/question-answering-with-pytorch-transformers-part-1-8736196bf20e) was very informative on the Q&A logic.
+Major credit goes to Paton Wongviboonsin whose [blog series](https://medium.com/@patonw/question-answering-with-pytorch-transformers-part-1-8736196bf20e) was very informative on the Q&A logic.
 I used a lot of the Q&A logic code from his [repo](https://github.com/patonw/questionable). My contribution is restructuring this logic
 into a more modular, scalable, and maintainable/testable system. 
 
