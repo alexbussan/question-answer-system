@@ -42,6 +42,7 @@ This BERT model returns a single answer span for each document, and a score for 
 - Add requirements.txt to local_demo
 - General cleanup and debugging
 - Try deploying to Localstack
+- Try less abstracted BERT logic (don't use Transformers Pipeline)
 
 ## Run Flow locally
 `cd local_demo`
