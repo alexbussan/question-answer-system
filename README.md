@@ -53,7 +53,7 @@ create and activate a conda environment
 
 `python -m spacy download en` (needed for spacy lemmatizer)
 
-`python run_processors.py`
+run run_processors.py in
 
 Here is what the result looks like:
 ![result](docs/images/results.png)
