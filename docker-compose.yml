@@ -1,3 +1,5 @@
+# This file is used for setting up localstack, which allows for deploying
+# lambdas/step functions/other AWS resources locally
 version: "3.8"
 services:
   localstack:

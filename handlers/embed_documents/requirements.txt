@@ -1,0 +1,4 @@
+embedder==0.0.7
+base_handler==0.0.0
+data_connectors_qna==0.0.0
+preprocessor_qna==0.0.1

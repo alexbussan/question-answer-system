@@ -1,13 +1,13 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: "An example template with an IAM role for a Lambda state machine."
+Description: "Flow that embeds each document in the search corpus, and stores these embeddings."
 
 Parameters:
-  ImageName:
+  EmbedDocumentsImageName:
     Type: String
-    Default: qna-dev-ecr-repository
-  ImageTag:
+    Default: qna-dev-embed-documents
+  EmbedDocumentsImageTag:
     Type: String
-    Default: 0.0.1
+    Default: 0.0.0
 
 Resources:
   LambdaExecutionRole:
@@ -21,13 +21,13 @@ Resources:
               Service: lambda.amazonaws.com
             Action: "sts:AssumeRole"
 
-  MyLambdaFunction:
+  EmbedDocumentsFunction:
     Type: "AWS::Lambda::Function"
     Properties:
       PackageType: Image
       Role: !GetAtt [ LambdaExecutionRole, Arn ]
       Code:
-        ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${ImageName}:${ImageTag}
+        ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${EmbedDocumentsImageName}:${EmbedDocumentsImageTag}
       Timeout: 10
 
   StatesExecutionRole:
@@ -52,22 +52,22 @@ Resources:
                   - "lambda:InvokeFunction"
                 Resource: "*"
 
-  MyStateMachine:
+  EmbedCorpusStateMachine:
     Type: "AWS::StepFunctions::StateMachine"
     Properties:
       DefinitionString:
         !Sub
           - |-
             {
-              "Comment": "A Hello World example using an AWS Lambda function",
-              "StartAt": "HelloWorld",
+              "Comment": "Flow that embeds each document in the search corpus, and stores these embeddings.",
+              "StartAt": "EmbedCorpus",
               "States": {
-                "HelloWorld": {
+                "EmbedCorpus": {
                   "Type": "Task",
                   "Resource": "${lambdaArn}",
                   "End": true
                 }
               }
             }
-          - {lambdaArn: !GetAtt [ MyLambdaFunction, Arn ]}
+          - {lambdaArn: !GetAtt [ EmbedDocumentsFunction, Arn ]}
       RoleArn: !GetAtt [ StatesExecutionRole, Arn ]

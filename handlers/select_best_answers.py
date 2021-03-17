@@ -2,8 +2,8 @@ import json
 import boto3
 
 from comprehender import Comprehender
-from data_connectors.reader import CsvReader
-from data_connectors.writer import CsvWriter
+from data_connectors_qna.reader import CsvReader
+from data_connectors_qna.writer import CsvWriter
 
 
 def select_best_answers(event, context):

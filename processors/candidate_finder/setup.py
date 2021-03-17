@@ -10,7 +10,7 @@ if os.path.isfile(requirements_path):
         install_requires = f.read().splitlines()
 
 setup(
-    name="data_connectors",
+    name="candidate_finder",
     version="0.0.0",
     install_requires=install_requires,
     packages=find_packages(exclude=("tests",)),

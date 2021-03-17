@@ -4,4 +4,4 @@ Resources:
   ECRRepository:
     Type: AWS::ECR::Repository
     Properties:
-      RepositoryName: qna-dev-ecr-repository
+      RepositoryName: qna-dev-embed-documents

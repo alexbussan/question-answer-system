@@ -10,8 +10,8 @@ if os.path.isfile(requirements_path):
         install_requires = f.read().splitlines()
 
 setup(
-    name="preprocessor",
-    version="0.0.0",
+    name="preprocessor_qna",
+    version="0.0.1",
     install_requires=install_requires,
     packages=find_packages(exclude=("tests",)),
 )

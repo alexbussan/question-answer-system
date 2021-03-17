@@ -1,9 +1,8 @@
 import json
-import boto3
 
-from similarity_finder import SimilarityFinder
-from data_connectors.reader import CsvReader
-from data_connectors.writer import CsvWriter
+from candidate_finder import DotProductFinder
+from data_connectors_qna.reader import CsvReader
+from data_connectors_qna.writer import CsvWriter
 
 
 def compute_similarity(event, context):
@@ -11,17 +10,15 @@ def compute_similarity(event, context):
     event_body = event["body"]
 
     # read data
-    # TODO: make input_path a parameter for read()
     reader = CsvReader()
-    query_embedding = event["query_embedding"]
+    question_embedding = event["question_embedding"]
     corpus_embeddings = reader.read(event_body["embeddings_input_path"])
+    lemmas = reader.read(event_body["lemas_input_path"])
 
     # do similarity computation
-    # this df is just a list of most similar document_ids
-    similarity_df = SimilarityFinder(
-        query_embedding=query_embedding,
-        corpus_embeddings=corpus_embeddings
-    ).process()
+    candidate_docs, results_indicies = DotProductFinder().process(
+        corpus_embeddings, question_embedding, lemmas
+    )
 
     # return similarity list to stepfunctions
 
