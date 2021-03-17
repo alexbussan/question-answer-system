@@ -1,1 +1,7 @@
-# TODO: add
+transformers
+torch
+base-processor==0.0.2
+numpy
+sklearn
+pandas
+spacy
