@@ -1,0 +1,19 @@
+# This file is used for setting up localstack, which allows for deploying
+# lambdas/step functions/other AWS resources locally
+version: "3.8"
+services:
+  localstack:
+    container_name: localstack_main
+    image: localstack/localstack
+    network_mode: bridge
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=dynamodb,sts,cloudformation,s3,iam,lambda,apigateway,serverless,ecr
+      - LAMBDA_EXECUTOR=docker-reuse
+      - DATA_DIR=/tmp/localstack/data
+      - AWS_ACCESS_KEY_ID=XXX
+      - AWS_SECRET_ACCESS_KEY=XXX
+    volumes:
+      - "/tmp/localstack:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"

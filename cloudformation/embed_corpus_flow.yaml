@@ -1,0 +1,76 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Flow that embeds each document in the search corpus, and stores these embeddings."
+
+# TODO: add parameters for each handler
+Parameters:
+  EmbedDocumentsImageName:
+    Type: String
+    Default: qna-dev-embed-documents
+  EmbedDocumentsImageTag:
+    Type: String
+    Default: 0.0.0
+
+Resources:
+  LambdaExecutionRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: "sts:AssumeRole"
+
+  EmbedDocumentsFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      PackageType: Image
+      Role: !GetAtt [ LambdaExecutionRole, Arn ]
+      Code:
+        ImageUri: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${EmbedDocumentsImageName}:${EmbedDocumentsImageTag}
+      Timeout: 10
+
+  StatesExecutionRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - !Sub states.${AWS::Region}.amazonaws.com
+            Action: "sts:AssumeRole"
+      Path: "/"
+      Policies:
+        - PolicyName: StatesExecutionPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - "lambda:InvokeFunction"
+                Resource: "*"
+
+  EmbedCorpusStateMachine:
+    Type: "AWS::StepFunctions::StateMachine"
+    Properties:
+      DefinitionString:
+        !Sub
+          - |-
+            {
+              "Comment": "Flow that embeds each document in the search corpus, and stores these embeddings.",
+              "StartAt": "EmbedCorpus",
+              "States": {
+                "EmbedCorpus": {
+                  "Type": "Task",
+                  "Resource": "${lambdaArn}",
+                  "End": true
+                }
+              }
+            }
+          - {lambdaArn: !GetAtt [ EmbedDocumentsFunction, Arn ]}
+      RoleArn: !GetAtt [ StatesExecutionRole, Arn ]
+
+# TODO: add FindAnswerStateMachine
