@@ -28,8 +28,8 @@ Then, when a question is asked, it is also embedded. The question embedding is
 compared against all corpus embeddings and the top k most similar documents are taken as 
 candidates.
 
-The candidates are then run through a BERT model that is finetuned on the SQUAD Q&A dataset.
-This BERT model returns a single answer span and score fore each documents's answer. 
+The candidate docuemnts are then run through a BERT model (along with the question) that is finetuned on the SQUAD Q&A dataset.
+This BERT model returns a single answer span for each document, and a score for each answer. 
 
 
 ## Todos
@@ -42,6 +42,7 @@ This BERT model returns a single answer span and score fore each documents's ans
 - Add requirements.txt to local_demo
 - General cleanup and debugging
 - Try deploying to Localstack
+- Try less abstracted BERT logic (don't use Transformers Pipeline)
 
 ## Run Flow locally
 `cd local_demo`
@@ -56,7 +57,7 @@ Here is what the result looks like:
 ![result](docs/images/results.png)
 
 ## Credits
-Major credit goes to Paton Wongviboonsin who's [blog series](https://medium.com/@patonw/question-answering-with-pytorch-transformers-part-1-8736196bf20e) was very informative on the Q&A logic.
+Major credit goes to Paton Wongviboonsin whose [blog series](https://medium.com/@patonw/question-answering-with-pytorch-transformers-part-1-8736196bf20e) was very informative on the Q&A logic.
 I used a lot of the Q&A logic code from his [repo](https://github.com/patonw/questionable). My contribution is restructuring this logic
 into a more modular, scalable, and maintainable/testable system. 
 
